@@ -98,50 +98,78 @@
   </div>
 
   <script>
-    const url = "https://script.google.com/macros/s/AKfycbwdj28x2XpZ4nrzo8R67KA3E-OSm44CWrPCXRntUuJxBoZVOjPUeR_tyaSWTj7DIs9CVQ/exec";
+  const url = "https://script.google.com/macros/s/AKfycbwJNwjEI0QjntRwNEl3PlPf-IC5Dd15R6dSlcaRtkgOpNljXK77EKLikm1W3PGZkjS5jA/exec";
 
-    fetch(url)
-      .then(res => res.json())
-      .then(aprobados => {
-        const elNombre = document.querySelector(".nombre");
-        const elDeseo1 = document.querySelector(".deseo1");
-        const elDeseo2 = document.querySelector(".deseo2");
+  fetch(url)
+    .then(res => res.json())
+    .then(aprobados => {
 
-        if (!aprobados || aprobados.length === 0) {
-          elNombre.textContent = "--";
-          elDeseo1.textContent = "";
+      const elNombre = document.querySelector(".nombre");
+      const elDeseo1 = document.querySelector(".deseo1");
+      const elDeseo2 = document.querySelector(".deseo2");
+
+      if (!aprobados || aprobados.length === 0) {
+
+        elNombre.textContent = "";
+        elDeseo1.textContent = "No hay mensajes aprobados";
+        elDeseo2.textContent = "";
+
+        return;
+      }
+
+      let index = Math.floor(Math.random() * aprobados.length);
+
+      function mostrar(i) {
+
+        elNombre.classList.remove("mostrar");
+        elDeseo1.classList.remove("mostrar");
+        elDeseo2.classList.remove("mostrar");
+
+        setTimeout(() => {
+
+          const item = aprobados[i];
+
+          // Nombre mamá
+          elNombre.textContent =
+            item.mama
+            ? item.mama.toUpperCase()
+            : "";
+
+          // Dicho
+          elDeseo1.textContent =
+            item.dicho
+            ? `"${item.dicho}"`
+            : "";
+
           elDeseo2.textContent = "";
-          return;
-        }
 
-        let index = Math.floor(Math.random() * aprobados.length);
+          elNombre.classList.add("mostrar");
+          elDeseo1.classList.add("mostrar");
+          elDeseo2.classList.add("mostrar");
 
-        function mostrar(i) {
-          elNombre.classList.remove("mostrar");
-          elDeseo1.classList.remove("mostrar");
-          elDeseo2.classList.remove("mostrar");
+        }, 300);
+      }
 
-          setTimeout(() => {
-            const item = aprobados[i];
+      mostrar(index);
 
-            elNombre.textContent = (item.nombre || "--").toUpperCase();
-            elDeseo1.textContent = item.deseo1 ? ` ${item.deseo1}` : "";
-            elDeseo2.textContent = item.deseo2 ? ` ${item.deseo2}` : "";
+      setInterval(() => {
 
-            elNombre.classList.add("mostrar");
-            elDeseo1.classList.add("mostrar");
-            elDeseo2.classList.add("mostrar");
-          }, 300);
-        }
+        index = (index + 1) % aprobados.length;
 
         mostrar(index);
 
-        setInterval(() => {
-          index = (index + 1) % aprobados.length;
-          mostrar(index);
-        }, 5000);
-      });
-  </script>
+      }, 5000);
+
+    })
+    .catch(error => {
+
+      console.error(error);
+
+      document.querySelector(".deseo1").textContent =
+        "Error cargando mensajes";
+
+    });
+</script>
 </body>
 </html>
 
