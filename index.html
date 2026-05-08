@@ -1,28 +1,34 @@
-	<!DOCTYPE html> 
+	<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Día del padre - iCo Medios</title>
+  <title>Día de la madre - iCo Medios</title>
   <meta http-equiv="refresh" content="180">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap" rel="stylesheet">
 
- <style>
+  <style>
+
     html, body {
       margin: 0;
       padding: 0;
       background-color: #ffffff;
       overflow: hidden;
+      width: 100%;
+      height: 100%;
     }
 
     .contenedor {
       position: relative;
       width: 100vw;
       height: 100vh;
+      overflow: hidden;
     }
 
+    /* VIDEO */
     video#fondoVideo {
       position: absolute;
       top: 0;
@@ -33,143 +39,156 @@
       z-index: 0;
     }
 
-    /* ----- Contenedor general ----- */
+    /* CONTENEDOR GENERAL */
     #nombres {
       position: absolute;
-      bottom: 5vh;           /* mueve todo el bloque */
       left: 50%;
+      bottom: 7vh;
       transform: translateX(-50%);
-      width: 80vw;
+      width: 85vw;
       text-align: center;
       z-index: 3;
     }
 
-   /* ----- Posiciones individuales ----- */
-.nombre {
-  position: absolute;
-  top: -14vh;     /* súbelo o bájalo */
-  left: -3vh;
-  width: 100%;
-}
-
-.deseo1 {
-  position: absolute;
-  top: -5vh;     /* súbelo o bájalo */
-  left: -3vh;
-  width: 100%;
-}
-
-.deseo2 {
-  position: absolute;
-  top: -6vh;    /* súbelo o bájalo */
-  left: -3vh;
-  width: 100%;
-}
-
-    .mensaje {
+    /* NOMBRE MAMÁ */
+    .nombre {
       position: relative;
       color: #1A3869;
-      font-size: 3vw;
+      font-size: 4vw;
       font-family: "Berkshire Swash", serif;
       font-weight: 400;
+      margin-bottom: 2vh;
+
       opacity: 0;
-      transition: opacity 0.9s ease-in;
-      margin: 1vh 0;
+      transition: opacity 0.8s ease;
     }
 
-    .mensaje.mostrar {
+    /* DICHO */
+    .dicho {
+      position: relative;
+      color: #1A3869;
+      font-size: 2.6vw;
+      line-height: 1.2;
+      font-family: "Berkshire Swash", serif;
+      font-weight: 400;
+
+      padding: 0 4vw;
+      box-sizing: border-box;
+
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+
+    .mostrar {
       opacity: 1;
     }
+
   </style>
 </head>
 
 <body>
+
   <div class="contenedor">
+
+    <!-- VIDEO -->
     <video autoplay loop muted playsinline id="fondoVideo">
       <source src="fondo.mp4" type="video/mp4">
       Tu navegador no soporta video.
     </video>
 
+    <!-- TEXTO -->
     <div id="nombres">
-      <div class="mensaje nombre"></div>
-      <div class="mensaje deseo1"></div>
-      <div class="mensaje deseo2"></div>
+
+      <div class="nombre"></div>
+
+      <div class="dicho"></div>
+
     </div>
+
   </div>
 
   <script>
-  const url = "https://script.google.com/macros/s/AKfycbwJNwjEI0QjntRwNEl3PlPf-IC5Dd15R6dSlcaRtkgOpNljXK77EKLikm1W3PGZkjS5jA/exec";
 
-  fetch(url)
-    .then(res => res.json())
-    .then(aprobados => {
+    const url =
+      "https://script.google.com/macros/s/AKfycbwdj28x2XpZ4nrzo8R67KA3E-OSm44CWrPCXRntUuJxBoZVOjPUeR_tyaSWTj7DIs9CVQ/exec";
 
-      const elNombre = document.querySelector(".nombre");
-      const elDeseo1 = document.querySelector(".deseo1");
-      const elDeseo2 = document.querySelector(".deseo2");
+    fetch(url)
 
-      if (!aprobados || aprobados.length === 0) {
+      .then(res => res.json())
 
-        elNombre.textContent = "";
-        elDeseo1.textContent = "No hay mensajes aprobados";
-        elDeseo2.textContent = "";
+      .then(aprobados => {
 
-        return;
-      }
+        const elNombre =
+          document.querySelector(".nombre");
 
-      let index = Math.floor(Math.random() * aprobados.length);
+        const elDicho =
+          document.querySelector(".dicho");
 
-      function mostrar(i) {
+        if (!aprobados || aprobados.length === 0) {
 
-        elNombre.classList.remove("mostrar");
-        elDeseo1.classList.remove("mostrar");
-        elDeseo2.classList.remove("mostrar");
+          elNombre.textContent = "";
 
-        setTimeout(() => {
+          elDicho.textContent =
+            "No hay mensajes aprobados";
 
-          const item = aprobados[i];
+          elDicho.classList.add("mostrar");
 
-          // Nombre mamá
-          elNombre.textContent =
-            item.mama
-            ? item.mama.toUpperCase()
-            : "";
+          return;
+        }
 
-          // Dicho
-          elDeseo1.textContent =
-            item.dicho
-            ? `"${item.dicho}"`
-            : "";
+        let index =
+          Math.floor(Math.random() * aprobados.length);
 
-          elDeseo2.textContent = "";
+        function mostrar(i) {
 
-          elNombre.classList.add("mostrar");
-          elDeseo1.classList.add("mostrar");
-          elDeseo2.classList.add("mostrar");
+          elNombre.classList.remove("mostrar");
+          elDicho.classList.remove("mostrar");
 
-        }, 300);
-      }
+          setTimeout(() => {
 
-      mostrar(index);
+            const item = aprobados[i];
 
-      setInterval(() => {
+            /* Nombre mamá */
+            elNombre.textContent =
+              item.mama
+              ? item.mama.toUpperCase()
+              : "--";
 
-        index = (index + 1) % aprobados.length;
+            /* Dicho */
+            elDicho.textContent =
+              item.dicho
+              ? `"${item.dicho}"`
+              : "";
+
+            elNombre.classList.add("mostrar");
+            elDicho.classList.add("mostrar");
+
+          }, 300);
+        }
 
         mostrar(index);
 
-      }, 5000);
+        setInterval(() => {
 
-    })
-    .catch(error => {
+          index =
+            (index + 1) % aprobados.length;
 
-      console.error(error);
+          mostrar(index);
 
-      document.querySelector(".deseo1").textContent =
-        "Error cargando mensajes";
+        }, 5000);
 
-    });
-</script>
+      })
+
+      .catch(error => {
+
+        console.error(error);
+
+        document.querySelector(".dicho").textContent =
+          "Error cargando mensajes";
+
+      });
+
+  </script>
 </body>
 </html>
 
