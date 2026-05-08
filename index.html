@@ -39,62 +39,68 @@
     }
 
     /* CONTENEDOR TEXTO */
-    #nombres {
-      position: absolute;
-      left: 50%;
-      bottom: 8vh;
-      transform: translateX(-50%);
-      width: 85vw;
+   /* CONTENEDOR GENERAL */
+#nombres {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+}
 
-      text-align: center;
+/* NOMBRE MAMÁ */
+.nombre {
 
-      z-index: 5;
-    }
+  position: absolute;
 
-    /* NOMBRE */
-    .nombre {
+  top: 780px;   /* ← mueve vertical */
+  left: 900px;  /* ← mueve horizontal */
 
-      color: #FFDBCC;
+  width: 2000px;
 
-      font-size: 4vw;
+  text-align: center;
 
-      font-family: "Open Sans", sans-serif;
+  color: #FFDBCC;
 
-      font-style: italic;
+  font-size: 150px;
 
-      font-weight: 800;
+  font-family: "Open Sans", sans-serif;
 
-      margin-bottom: 1.5vh;
+  font-style: italic;
 
-      opacity: 0;
+  font-weight: 800;
 
-      transition: opacity .8s ease;
-    }
+  opacity: 0;
 
-    /* DICHO */
-    .dicho {
+  transition: opacity .8s ease;
+}
 
-      color: #F3574A;
+/* DICHO */
+.dicho {
 
-      font-size: 2.6vw;
+  position: absolute;
 
-      line-height: 1.2;
+  top: 980px;   /* ← mueve vertical */
+  left: 500px;  /* ← mueve horizontal */
 
-      font-family: "Open Sans", sans-serif;
+  width: 2800px;
 
-      font-style: italic;
+  text-align: center;
 
-      font-weight: 800;
+  color: #F3574A;
 
-      padding: 0 4vw;
+  font-size: 95px;
 
-      box-sizing: border-box;
+  line-height: 1.2;
 
-      opacity: 0;
+  font-family: "Open Sans", sans-serif;
 
-      transition: opacity .8s ease;
-    }
+  font-style: italic;
 
+  font-weight: 800;
+
+  opacity: 0;
+
+  transition: opacity .8s ease;
+}
     .mostrar {
       opacity: 1;
     }
