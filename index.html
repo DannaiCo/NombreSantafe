@@ -21,12 +21,16 @@
       background: #ffffff;
     }
 
-    .contenedor {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-    }
+   .contenedor {
+  position: relative;
+
+  width: 2560px;
+  height: 1440px;
+
+  overflow: hidden;
+
+  transform-origin: top left;
+}
 
     /* VIDEO */
     #fondoVideo {
@@ -127,101 +131,105 @@
     </div>
 
   </div>
+<script>
 
-  <script>
+  function escalarPantalla() {
 
-    const url =
-      "https://script.google.com/macros/s/AKfycbwJNwjEI0QjntRwNEl3PlPf-IC5Dd15R6dSlcaRtkgOpNljXK77EKLikm1W3PGZkjS5jA/exec";
+    const escalaX = window.innerWidth / 2560;
+    const escalaY = window.innerHeight / 1440;
 
-    const elNombre =
-      document.querySelector(".nombre");
+    const escala = Math.min(escalaX, escalaY);
 
-    const elDicho =
-      document.querySelector(".dicho");
+    document.querySelector(".contenedor").style.transform =
+      `scale(${escala})`;
+  }
 
-    fetch(url)
+  window.addEventListener("resize", escalarPantalla);
 
-      .then(response => response.json())
+  escalarPantalla();
 
-      .then(data => {
+  const url =
+    "https://script.google.com/macros/s/AKfycbwJNwjEI0QjntRwNEl3PlPf-IC5Dd15R6dSlcaRtkgOpNljXK77EKLikm1W3PGZkjS5jA/exec";
 
-        console.log(data);
+  const elNombre =
+    document.querySelector(".nombre");
 
-        if (!data || data.length === 0) {
+  const elDicho =
+    document.querySelector(".dicho");
 
-          elNombre.textContent = "";
+  fetch(url)
 
-          elDicho.textContent =
-            "No hay mensajes aprobados";
+    .then(response => response.json())
 
-          elDicho.classList.add("mostrar");
+    .then(data => {
 
-          return;
-        }
+      console.log(data);
 
-        let index = 0;
+      if (!data || data.length === 0) {
 
-        function mostrarMensaje() {
-
-          const item = data[index];
-
-          console.log(item);
-
-          elNombre.classList.remove("mostrar");
-          elDicho.classList.remove("mostrar");
-
-          setTimeout(() => {
-
-            /* IMPORTANTE:
-               ESTE CÓDIGO USA:
-               item.nombre
-               item.deseo1
-
-               porque seguramente tu Apps Script
-               está devolviendo esos nombres.
-            */
-
-            elNombre.textContent =
-  item.mama
-  ? item.mama.toUpperCase()
-  : "--";
-
-elDicho.textContent =
-  item.dicho
-  ? `"${item.dicho}"`
-  : "";
-
-            elNombre.classList.add("mostrar");
-            elDicho.classList.add("mostrar");
-
-          }, 300);
-
-          index++;
-
-          if (index >= data.length) {
-            index = 0;
-          }
-        }
-
-        mostrarMensaje();
-
-        setInterval(mostrarMensaje, 5000);
-
-      })
-
-      .catch(error => {
-
-        console.error(error);
+        elNombre.textContent = "";
 
         elDicho.textContent =
-          "Error cargando mensajes";
+          "No hay mensajes aprobados";
 
         elDicho.classList.add("mostrar");
 
-      });
+        return;
+      }
 
-  </script>
+      let index = 0;
 
+      function mostrarMensaje() {
+
+        const item = data[index];
+
+        console.log(item);
+
+        elNombre.classList.remove("mostrar");
+        elDicho.classList.remove("mostrar");
+
+        setTimeout(() => {
+
+          elNombre.textContent =
+            item.mama
+            ? item.mama.toUpperCase()
+            : "--";
+
+          elDicho.textContent =
+            item.dicho
+            ? `"${item.dicho}"`
+            : "";
+
+          elNombre.classList.add("mostrar");
+          elDicho.classList.add("mostrar");
+
+        }, 300);
+
+        index++;
+
+        if (index >= data.length) {
+          index = 0;
+        }
+      }
+
+      mostrarMensaje();
+
+      setInterval(mostrarMensaje, 5000);
+
+    })
+
+    .catch(error => {
+
+      console.error(error);
+
+      elDicho.textContent =
+        "Error cargando mensajes";
+
+      elDicho.classList.add("mostrar");
+
+    });
+
+</script>
 </body>
 </html>
 
