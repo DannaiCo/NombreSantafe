@@ -7,8 +7,7 @@
   <meta http-equiv="refresh" content="180">
 
   <!-- FUENTE -->
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,800&display=swap" rel="stylesheet">
-
+<link rel="stylesheet" href="https://use.typekit.net/vsp7vcb.css">
   <style>
 
     html,
@@ -55,22 +54,22 @@
 
   position: absolute;
 
-  top: 904px;   /* ← mueve vertical */
-  left: 165px;  /* ← mueve horizontal */
+  top: 904px;
+  left: 165px;
 
   width: 2000px;
 
   text-align: center;
 
-  color: #FFDBCC;
+  color: #0000EC;
 
   font-size: 89px;
 
-  font-family: "Open Sans", sans-serif;
+  font-family: "filson-soft", sans-serif;
 
-  font-style: italic;
+  font-weight: 700;
 
-  font-weight: 800;
+  font-style: normal;
 
   opacity: 0;
 
@@ -82,24 +81,24 @@
 
   position: absolute;
 
-  top: 561px;   /* ← mueve vertical */
-  left: 87px;  /* ← mueve horizontal */
+  top: 561px;
+  left: 87px;
 
   width: 1300px;
 
   text-align: center;
 
-  color: #F3574A;
+  color: #0000EC;
 
   font-size: 107px;
 
   line-height: 1.2;
 
-  font-family: "Open Sans", sans-serif;
+  font-family: "filson-soft", sans-serif;
 
-  font-style: italic;
+  font-weight: 700;
 
-  font-weight: 800;
+  font-style: normal;
 
   opacity: 0;
 
@@ -149,7 +148,7 @@
   escalarPantalla();
 
   const url =
-    "https://script.google.com/macros/s/AKfycbwJNwjEI0QjntRwNEl3PlPf-IC5Dd15R6dSlcaRtkgOpNljXK77EKLikm1W3PGZkjS5jA/exec";
+    "https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnR9sKMc4V_LT0YpJPKgHrTJdw0886LZpZCfFNDpmgqn_PWAkG04bVDbX9kRZgvbFEqfoXH3m59Qk4I-xa_oOHjfdYnsQVZEZGK-I4CHcEfwd6hcV7aFEe_RcBuls2LkfXbRrxyQ5Z0Ga_0Q4tYTUKnD148IiUGF0u1wOkY2LsiW_5PKXaTSE84s06IXxbrC52CGNkw2ZrPMqT1vigNBDcUHE2P6ld_vTvwYRaKn4lj6FagP0VZjSNexLfGeTOgNPvK-AFa0CvCvWO7wVAbZb8yo0mX2MQ&lib=MLNAcr3Jke4q8WCYQeQbKPKeEHa1C_Htb";
 
   const elNombre =
     document.querySelector(".nombre");
@@ -190,15 +189,15 @@
 
         setTimeout(() => {
 
-          elNombre.textContent =
-            item.mama
-            ? item.mama.toUpperCase()
-            : "--";
+         elNombre.textContent =
+  item.papa
+  ? item.papa.toUpperCase()
+  : "--";
 
-          elDicho.textContent =
-            item.dicho
-            ? `"${item.dicho}"`
-            : "";
+elDicho.textContent =
+  item.mensaje
+  ? `"${item.mensaje}"`
+  : "";
 
           elNombre.classList.add("mostrar");
           elDicho.classList.add("mostrar");
